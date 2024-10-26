@@ -3,9 +3,11 @@
 import { User } from "@/models/User.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import { dbConnet } from "@/lib/dbConnectoin";
 
 export async function POST(req: NextRequest) {
   try {
+    await dbConnet();
     // Parse the incoming request body
     const { username, email, password } = await req.json();
 
