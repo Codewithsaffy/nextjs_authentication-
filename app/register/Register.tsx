@@ -33,7 +33,7 @@ const RegisterPage = () => {
       // Navigate to the login page upon successful registration
       router.push("/login");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setMessage("Registration failed. please try again laterr");
     }
   };
@@ -49,9 +49,7 @@ const RegisterPage = () => {
             Create an Account
           </h1>
 
-          {message && (
-            <p className="text-red-500 text-center">{message}</p>
-          )}
+          {message && <p className="text-red-500 text-center">{message}</p>}
 
           <div>
             <input
