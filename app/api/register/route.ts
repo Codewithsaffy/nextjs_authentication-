@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
       return new NextResponse("All fields are required", { status: 400 });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email }).select("-password");
     if (existingUser) {
       return new NextResponse("Email already in use", { status: 409 });
     }
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       email,
       password: hashedPassword,
     });
-    await user.save();
+    const response = await user.save();
 
     return new NextResponse("Registrations successful", { status: 201 });
   } catch (err) {

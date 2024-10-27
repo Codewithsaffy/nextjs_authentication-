@@ -5,7 +5,7 @@ import { LOGIN, PROTECTED_ROUTES, PUBLIC_ROUTES, ROOT } from "./lib/route";
 
 const { auth } = NextAuth(authConfig);
 
-export async function middleware(req: NextRequest) {
+async function middleware(req: NextRequest) {
   const { nextUrl } = req;
   const session = await auth();
   const isAuthenticated = !!session?.user;
@@ -23,3 +23,5 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: ["/check", "/api/:path*"],
 };
+
+export default middleware;

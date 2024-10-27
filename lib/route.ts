@@ -6,5 +6,6 @@ export const PUBLIC_ROUTES = [
   "/allProducts",
   "/api/auth/callback/google",
   "/api/auth/callback/github",
+  "/api/register",
 ];
 export const PROTECTED_ROUTES = ["/dashboard", "/check"];
