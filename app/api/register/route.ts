@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       email,
       password: hashedPassword,
     });
-    const response = await user.save();
+     await user.save();
 
     return new NextResponse("Registrations successful", { status: 201 });
   } catch (err) {
