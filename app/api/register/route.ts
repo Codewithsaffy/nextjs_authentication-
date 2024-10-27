@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
       return new NextResponse("All fields are required", { status: 400 });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email }).select("-password");
     if (existingUser) {
       return new NextResponse("Email already in use", { status: 409 });
     }
@@ -29,10 +29,9 @@ export async function POST(req: NextRequest) {
       email,
       password: hashedPassword,
     });
+    const response = await user.save();
 
-    console.log("User created:", user);
-
-    return new NextResponse("Registration successful", { status: 201 });
+    return new NextResponse("Registrations successful", { status: 201 });
   } catch (err) {
     console.error("Registration error:", err);
     return new NextResponse("Internal Server Error", { status: 500 });

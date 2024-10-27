@@ -4,15 +4,14 @@ import bcrypt from "bcrypt";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { getUserByEmail } from "./actions/socialLogin";
+import { authConfig } from "./auth.config";
 export const {
   handlers: { GET, POST },
   auth,
   signIn,
   signOut,
 } = NextAuth({
-  session: {
-    strategy: "jwt",
-  },
+  ...authConfig,
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -58,7 +57,7 @@ export const {
 
       authorization: {
         params: {
-          prompt: "consent", // ask github continue or not
+          prompt: "consent",
           access_type: "offline",
           response_type: "code",
         },

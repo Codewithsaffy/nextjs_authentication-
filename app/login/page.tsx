@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { doSocialLogin } from "@/actions/socialLogin"; // Ensure this import is correct
 import CredentialForm from "@/components/forms/credantials";
 
-
 const LoginPage = async () => {
   const session = await auth();
   if (session?.user) redirect("/dashboard");
@@ -21,7 +20,7 @@ const LoginPage = async () => {
         </p>
 
         {/* Credentials Login Form */}
-        <CredentialForm/>
+        <CredentialForm />
 
         {/* Separator */}
         <div className="flex items-center justify-center mb-3">
@@ -31,9 +30,12 @@ const LoginPage = async () => {
         </div>
 
         {/* Social Login Buttons */}
-        <form action={doSocialLogin}  className="flex flex-col items-center gap-2 mb-4">
+        <form
+          action={doSocialLogin}
+          className="flex flex-col items-center gap-2 mb-4"
+        >
           <button
-          type="submit"
+            type="submit"
             className="w-full flex items-center justify-center gap-2 p-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105"
             name="action"
             value="google"
@@ -42,7 +44,7 @@ const LoginPage = async () => {
             <span>Google</span>
           </button>
           <button
-          type="submit"
+            type="submit"
             className="w-full flex items-center justify-center gap-2 p-3 bg-gray-800 hover:bg-gray-900 text-white font-semibold rounded-lg transition-all transform hover:scale-105"
             name="action"
             value="github"
@@ -61,6 +63,10 @@ const LoginPage = async () => {
           and{" "}
           <a href="#" className="text-blue-500 underline">
             Privacy Policy
+          </a>
+          . If you don’t have an account,{" "}
+          <a href="/register" className="text-blue-500 underline">
+            register here
           </a>
           .
         </p>
