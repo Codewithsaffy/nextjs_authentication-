@@ -5,10 +5,15 @@ import { FiSun, FiMoon, FiLogIn, FiUserPlus, FiGrid } from "react-icons/fi";
 
 export default function Header() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle("dark");
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -19,7 +24,7 @@ export default function Header() {
           MyApp
         </h1>
 
-        {/* Links */}
+        {/* Links (Desktop) */}
         <nav className="space-x-8 hidden md:flex">
           <Link
             href="/dashboard"
@@ -41,7 +46,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Theme Toggle and Menu Button */}
+        {/* Theme Toggle and Mobile Menu Button */}
         <div className="flex items-center space-x-4">
           {/* Theme Toggle */}
           <button
@@ -57,7 +62,10 @@ export default function Header() {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden">
-            <button className="text-gray-700 dark:text-gray-300 focus:outline-none">
+            <button
+              onClick={toggleMenu}
+              className="text-gray-700 dark:text-gray-300 focus:outline-none"
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -76,6 +84,35 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden mt-4">
+          <nav className="flex flex-col space-y-4">
+            <Link
+              href="/dashboard"
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-300 flex items-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <FiGrid className="mr-1" /> Dashboard
+            </Link>
+            <Link
+              href="/register"
+              className="text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 font-medium transition-colors duration-300 flex items-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <FiUserPlus className="mr-1" /> Register
+            </Link>
+            <Link
+              href="/login"
+              className="text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 font-medium transition-colors duration-300 flex items-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <FiLogIn className="mr-1" /> Login
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
